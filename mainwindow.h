@@ -3,13 +3,18 @@
 
 #include <QMainWindow>
 
+class RTTConnector;
+class RTTParser;
+
 namespace Ui {
-class MainWindow;
+    class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
+private:
+    RTTConnector* rttConnector;
+    RTTParser* rttParser;
 
 public:
     explicit MainWindow(QWidget *parent = 0);
