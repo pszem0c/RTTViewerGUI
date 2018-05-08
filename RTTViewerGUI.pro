@@ -29,7 +29,9 @@ SOURCES += \
     ../RTTViewer/rttconnector.cpp \
     ../RTTViewer/rttlogger.cpp \
     ../RTTViewer/rttparser.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    rttchannelsettings.cpp \
+    addchanneldialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -37,7 +39,10 @@ HEADERS += \
     ../RTTViewer/rttconnector.h \
     ../RTTViewer/rttlogger.h \
     ../RTTViewer/rttparser.h \
-    qcustomplot.h
+    qcustomplot.h \
+    rttchannelsettings.h \
+    addchanneldialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    addchanneldialog.ui

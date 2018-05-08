@@ -2,9 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QList>
 
 class RTTConnector;
 class RTTParser;
+class RTTChannelSettings;
 
 namespace Ui {
     class MainWindow;
@@ -15,10 +17,22 @@ class MainWindow : public QMainWindow {
 private:
     RTTConnector* rttConnector;
     RTTParser* rttParser;
+    QList<RTTChannelSettings*> channelSettingsList;
+    qint32 idCount;
+    double plotTimeHorizon;
+
+    void addChannelToTableView(RTTChannelSettings* settings);
+    void addChannelToPlot(RTTChannelSettings* settings);
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+private slots:
+    void on_addChannelButton_clicked();
+    void addChannelSettings(RTTChannelSettings* settings);
+    void updateData(qint32 id, qint32 value);
+    void on_channelTable_cellChanged(int row, int column);
 
 private:
     Ui::MainWindow *ui;
