@@ -3,6 +3,8 @@
 
 #include <QString>
 
+class QCPGraph;
+
 class RTTChannelSettings {
 public:
     RTTChannelSettings();
@@ -11,6 +13,8 @@ public:
     qint32 id;
     QString format;
     QString color;
+    qint32  tableWidgetRow;
+    QCPGraph* graph;
 };
 
 #endif // RTTCHANNELSETTINGS_H

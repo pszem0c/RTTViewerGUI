@@ -5,5 +5,7 @@ RTTChannelSettings::RTTChannelSettings() {
     upperRange = 0;
     id = 0;
     format = "";
-    color = QColor(Qt::black);
+    color = "";
+    tableWidgetRow = 0;
+    graph = nullptr;
 }

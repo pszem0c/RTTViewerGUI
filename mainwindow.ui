@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>410</y>
+      <y>480</y>
       <width>1091</width>
       <height>192</height>
      </rect>
@@ -28,13 +28,23 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>610</y>
+      <y>680</y>
       <width>101</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
      <string>Add channel</string>
+    </property>
+   </widget>
+   <widget class="QCustomPlot" name="channelPlot" native="true">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>10</y>
+      <width>1091</width>
+      <height>461</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -76,6 +86,14 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

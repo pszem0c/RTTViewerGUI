@@ -7,6 +7,7 @@
 class RTTConnector;
 class RTTParser;
 class RTTChannelSettings;
+class RTTChannelController;
 
 namespace Ui {
     class MainWindow;
@@ -17,13 +18,9 @@ class MainWindow : public QMainWindow {
 private:
     RTTConnector* rttConnector;
     RTTParser* rttParser;
-    QList<RTTChannelSettings*> channelSettingsList;
-    qint32 idCount;
+    RTTChannelController* rttChannelController;
+
     double plotTimeHorizon;
-
-    void addChannelToTableView(RTTChannelSettings* settings);
-    void addChannelToPlot(RTTChannelSettings* settings);
-
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
