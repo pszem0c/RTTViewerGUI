@@ -14,14 +14,18 @@ private:
     QTableWidget* table;
     QCustomPlot* plot;
     qint32 idCount;
+    qint32 plotTimeHorizon;
+
 
     void addChannelToTable(RTTChannelSettings* settings);
+    void addChannelToPlot(RTTChannelSettings* settings);
 
 public:
     RTTChannelController(QTableWidget* tableWidget, QCustomPlot* customPlot);
 
     void addChannel(RTTChannelSettings* settings);
     void updateChannelValue(qint32 id, qint32 value);
+    void updateChannels(QList<QPair<qint32, qint32> > dataList);
     void tableValueChanged(int row, int column);
 };
 

@@ -8,4 +8,5 @@ RTTChannelSettings::RTTChannelSettings() {
     color = "";
     tableWidgetRow = 0;
     graph = nullptr;
+    msResolution = 0;
 }

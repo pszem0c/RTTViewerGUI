@@ -8,13 +8,14 @@ class QCPGraph;
 class RTTChannelSettings {
 public:
     RTTChannelSettings();
-    double lowerRange;
-    double upperRange;
-    qint32 id;
-    QString format;
-    QString color;
-    qint32  tableWidgetRow;
-    QCPGraph* graph;
+    double      lowerRange;
+    double      upperRange;
+    qint32      id;
+    QString     format;
+    QString     color;
+    qint32      tableWidgetRow;
+    QCPGraph*   graph;
+    qint32      msResolution;
 };
 
 #endif // RTTCHANNELSETTINGS_H

@@ -18,10 +18,10 @@ MainWindow::MainWindow(QWidget *parent) :
     rttConnector = new RTTConnector();
     rttParser = new RTTParser();
     rttChannelController = new RTTChannelController(ui->channelTable, ui->channelPlot);
-    plotTimeHorizon = 10000;
 
     connect(rttConnector, SIGNAL(lineRead(QString)), rttParser, SLOT(parseSlot(QString)));
-    connect(rttParser, SIGNAL(lineParsed(qint32,qint32)),this, SLOT(updateData(qint32,qint32)));
+    //connect(rttParser, SIGNAL(lineParsed(qint32,qint32)),this, SLOT(updateData(qint32,qint32)));
+    connect(rttParser, SIGNAL(lineParsed(QList<QPair<qint32, qint32> >)),this, SLOT(updateData(QList<QPair<qint32, qint32> >)));
 
     rttConnector->connectToHost();
 
@@ -37,6 +37,11 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event) {
+    rttConnector->disconnectFromHost();
+    event->accept();
+}
+
 
 void MainWindow::on_addChannelButton_clicked() {
     AddChannelDialog* addChannelDialog = new AddChannelDialog(this);
@@ -45,13 +50,16 @@ void MainWindow::on_addChannelButton_clicked() {
 }
 
 void MainWindow::addChannelSettings(RTTChannelSettings *settings) {
+    rttChannelController->addChannel(settings);
     rttParser->addChannel(settings->id, settings->format);
-
-    rttChannelController->addChannelToTable(settings);
 }
 
 void MainWindow::updateData(qint32 id, qint32 value) {
     rttChannelController->updateChannelValue(id, value);
+}
+
+void MainWindow::updateData(QList<QPair<qint32, qint32> > dataList) {
+    rttChannelController->updateChannels(dataList);
 }
 
 void MainWindow::on_channelTable_cellChanged(int row, int column) {

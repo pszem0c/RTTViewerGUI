@@ -19,16 +19,18 @@ private:
     RTTConnector* rttConnector;
     RTTParser* rttParser;
     RTTChannelController* rttChannelController;
-
-    double plotTimeHorizon;
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+protected:
+    void closeEvent(QCloseEvent* event);
 
 private slots:
     void on_addChannelButton_clicked();
     void addChannelSettings(RTTChannelSettings* settings);
     void updateData(qint32 id, qint32 value);
+    void updateData(QList<QPair<qint32, qint32> > dataList);
     void on_channelTable_cellChanged(int row, int column);
 
 private:

@@ -18,5 +18,6 @@ void AddChannelDialog::on_buttonBox_clicked(QAbstractButton *button) {
     channelSettings->lowerRange = ui->lowerRangeLineEdit->text().toDouble();
     channelSettings->upperRange = ui->upperRangeLineEdit->text().toDouble();
     channelSettings->color = ui->colorComboBox->currentText();
+    channelSettings->msResolution = ui->msResolutionEdit->text().toInt();
     emit addChannelSettings(channelSettings);
 }
