@@ -4,6 +4,7 @@
 #include <QString>
 
 class QCPGraph;
+class QFile;
 
 class RTTChannelSettings {
 public:
@@ -16,6 +17,7 @@ public:
     qint32      tableWidgetRow;
     QCPGraph*   graph;
     qint32      msResolution;
+    QFile*       file;
 };
 
 #endif // RTTCHANNELSETTINGS_H

@@ -8,6 +8,7 @@ class RTTConnector;
 class RTTParser;
 class RTTChannelSettings;
 class RTTChannelController;
+class RTTChannelLogger;
 
 namespace Ui {
     class MainWindow;
@@ -19,6 +20,7 @@ private:
     RTTConnector* rttConnector;
     RTTParser* rttParser;
     RTTChannelController* rttChannelController;
+    RTTChannelLogger* rttChannelLogger;
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();

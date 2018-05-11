@@ -13,11 +13,13 @@ AddChannelDialog::~AddChannelDialog() {
 }
 
 void AddChannelDialog::on_buttonBox_clicked(QAbstractButton *button) {
-    RTTChannelSettings* channelSettings = new RTTChannelSettings;
-    channelSettings->format = ui->formatLineEdit->text();
-    channelSettings->lowerRange = ui->lowerRangeLineEdit->text().toDouble();
-    channelSettings->upperRange = ui->upperRangeLineEdit->text().toDouble();
-    channelSettings->color = ui->colorComboBox->currentText();
-    channelSettings->msResolution = ui->msResolutionEdit->text().toInt();
-    emit addChannelSettings(channelSettings);
+    if (ui->buttonBox->standardButton(button) == QDialogButtonBox::Ok) {
+        RTTChannelSettings* channelSettings = new RTTChannelSettings;
+        channelSettings->format = ui->formatLineEdit->text();
+        channelSettings->lowerRange = ui->lowerRangeLineEdit->text().toDouble();
+        channelSettings->upperRange = ui->upperRangeLineEdit->text().toDouble();
+        channelSettings->color = ui->colorComboBox->currentText();
+        channelSettings->msResolution = ui->msResolutionEdit->text().toInt();
+        emit addChannelSettings(channelSettings);
+    }
 }

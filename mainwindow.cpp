@@ -6,6 +6,7 @@
 #include "rttchannelsettings.h"
 #include "qcustomplot.h"
 #include "rttchannelcontroller.h"
+#include "rttchannellogger.h"
 
 #include <QStringList>
 
@@ -18,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     rttConnector = new RTTConnector();
     rttParser = new RTTParser();
     rttChannelController = new RTTChannelController(ui->channelTable, ui->channelPlot);
+    rttChannelLogger = new RTTChannelLogger();
 
     connect(rttConnector, SIGNAL(lineRead(QString)), rttParser, SLOT(parseSlot(QString)));
     //connect(rttParser, SIGNAL(lineParsed(qint32,qint32)),this, SLOT(updateData(qint32,qint32)));
@@ -32,8 +34,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow() {
     rttConnector->disconnectFromHost();
+    delete rttChannelLogger;
     delete rttConnector;
     delete rttParser;
+    delete rttChannelController;
     delete ui;
 }
 
@@ -52,6 +56,7 @@ void MainWindow::on_addChannelButton_clicked() {
 void MainWindow::addChannelSettings(RTTChannelSettings *settings) {
     rttChannelController->addChannel(settings);
     rttParser->addChannel(settings->id, settings->format);
+    rttChannelLogger->addChannel(settings);
 }
 
 void MainWindow::updateData(qint32 id, qint32 value) {
@@ -60,6 +65,7 @@ void MainWindow::updateData(qint32 id, qint32 value) {
 
 void MainWindow::updateData(QList<QPair<qint32, qint32> > dataList) {
     rttChannelController->updateChannels(dataList);
+    rttChannelLogger->logData(dataList);
 }
 
 void MainWindow::on_channelTable_cellChanged(int row, int column) {
