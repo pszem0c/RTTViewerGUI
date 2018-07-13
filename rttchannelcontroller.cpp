@@ -81,10 +81,10 @@ void RTTChannelController::updateChannelValue(qint32 id, qint32 value) {
     }
 }
 
-void RTTChannelController::updateChannels(QList<QPair<qint32, qint32> > dataList) {
+void RTTChannelController::updateChannels(QList<QPair<qint32, float> > dataList) {
     qint32 time ;
     qint32 prevChannelId = -1;
-    for (QList<QPair<qint32, qint32> >::iterator itData = dataList.begin(); itData != dataList.end(); itData++) {
+    for (QList<QPair<qint32, float> >::iterator itData = dataList.begin(); itData != dataList.end(); itData++) {
         for (QList<RTTChannelSettings*>::iterator itChannel = channelSettingsList.begin(); itChannel != channelSettingsList.end(); itChannel++) {
             time = QTime::currentTime().msecsSinceStartOfDay();
             if ((*itChannel)->id == (*itData).first) {

@@ -13,7 +13,7 @@ public:
     RTTChannelLogger();
     ~RTTChannelLogger();
 
-    void logData(QList<QPair<qint32, qint32> > dataList);
+    void logData(QList<QPair<qint32, float> > dataList);
     void addChannel(RTTChannelSettings *settings);
 };
 

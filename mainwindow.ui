@@ -57,7 +57,30 @@
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="serialPortBox">
+    <property name="geometry">
+     <rect>
+      <x>1190</x>
+      <y>740</y>
+      <width>161</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>1360</x>
+      <y>740</y>
+      <width>141</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Refresh serials</string>
     </property>
    </widget>
   </widget>

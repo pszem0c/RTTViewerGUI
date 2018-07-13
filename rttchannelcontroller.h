@@ -25,7 +25,7 @@ public:
 
     void addChannel(RTTChannelSettings* settings);
     void updateChannelValue(qint32 id, qint32 value);
-    void updateChannels(QList<QPair<qint32, qint32> > dataList);
+    void updateChannels(QList<QPair<qint32, float> > dataList);
     void tableValueChanged(int row, int column);
 
     void saveConfigurationToFile(QString fileName);

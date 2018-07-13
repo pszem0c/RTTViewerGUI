@@ -15,10 +15,10 @@ RTTChannelLogger::~RTTChannelLogger() {
 }
 
 
-void RTTChannelLogger::logData(QList<QPair<qint32, qint32> > dataList) {
+void RTTChannelLogger::logData(QList<QPair<qint32, float> > dataList) {
     QTime time ;
     qint32 prevChannelId = -1;
-    for (QList<QPair<qint32, qint32> >::iterator itData = dataList.begin(); itData != dataList.end(); itData++) {
+    for (QList<QPair<qint32, float> >::iterator itData = dataList.begin(); itData != dataList.end(); itData++) {
         for (QList<RTTChannelSettings*>::iterator itChannel = channelSettingsList.begin(); itChannel != channelSettingsList.end(); itChannel++) {
             time = QTime::currentTime();
             if ((*itChannel)->id == (*itData).first) {
