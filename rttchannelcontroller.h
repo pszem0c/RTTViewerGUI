@@ -27,6 +27,9 @@ public:
     void updateChannelValue(qint32 id, qint32 value);
     void updateChannels(QList<QPair<qint32, qint32> > dataList);
     void tableValueChanged(int row, int column);
+
+    void saveConfigurationToFile(QString fileName);
+    QList<RTTChannelSettings*> loadConfigurationFromFile(QString fileName);
 };
 
 #endif // RTTCHANNELCONTROLLER_H

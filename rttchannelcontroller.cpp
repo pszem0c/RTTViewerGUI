@@ -4,6 +4,8 @@
 #include "rttchannelsettings.h"
 #include <QObject>
 #include <QTime>
+#include <QFile>
+#include <QTextStream>
 
 RTTChannelController::RTTChannelController(QTableWidget *tableWidget, QCustomPlot *customPlot) {
     table = tableWidget;
@@ -50,7 +52,7 @@ void RTTChannelController::addChannelToPlot(RTTChannelSettings *settings) {
     valAxis->setLabel(settings->format);
     valAxis->setTickPen(QPen(QColor(settings->color)));
     valAxis->setSubTickPen(QPen(QColor(settings->color)));
-    valAxis->setPadding(25*plot->graphCount());
+    valAxis->setPadding(25);
     valAxis->setRange(settings->lowerRange, settings->upperRange);
 
     settings->graph = plot->addGraph(plot->xAxis, valAxis);
@@ -122,6 +124,39 @@ void RTTChannelController::tableValueChanged(int row, int column) {
             break;
         }
     }
+}
+
+void RTTChannelController::saveConfigurationToFile(QString fileName) {
+    QFile file(fileName);
+    if (file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
+        QTextStream stream(&file);
+        for (QList<RTTChannelSettings*>::iterator it = channelSettingsList.begin(); it != channelSettingsList.end(); it++) {
+            stream << (*it)->lowerRange << ","
+                   << (*it)->upperRange << ","
+                   << (*it)->format << ","
+                   << (*it)->color << ","
+                   << (*it)->msResolution << endl;
+        }
+    }
+}
+
+QList<RTTChannelSettings *> RTTChannelController::loadConfigurationFromFile(QString fileName) {
+    QFile file(fileName);
+    if (file.open((QIODevice::ReadOnly))) {
+        QTextStream stream(&file);
+        while(!stream.atEnd()) {
+            QString line = stream.readLine();
+            QStringList args = line.split(",");
+            RTTChannelSettings* settings = new RTTChannelSettings;
+            settings->lowerRange    = ((QString)args.at(0)).toDouble();
+            settings->upperRange    = ((QString)args.at(1)).toDouble();
+            settings->format        = (QString)args.at(2);
+            settings->color         = (QString)args.at(3);
+            settings->msResolution  = ((QString)args.at(4)).toInt();
+            addChannel(settings);
+        }
+    }
+   return channelSettingsList;
 }
 
 

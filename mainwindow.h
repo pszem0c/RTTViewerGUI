@@ -34,6 +34,17 @@ private slots:
     void updateData(qint32 id, qint32 value);
     void updateData(QList<QPair<qint32, qint32> > dataList);
     void on_channelTable_cellChanged(int row, int column);
+    void onRttConnect();
+    void onRttDisconnect();
+    void onRttError(QString);
+
+    void on_action_Connect_triggered();
+
+    void on_action_Disconnect_triggered();
+
+    void on_action_Load_configuration_triggered();
+
+    void on_action_Save_configuration_triggered();
 
 private:
     Ui::MainWindow *ui;

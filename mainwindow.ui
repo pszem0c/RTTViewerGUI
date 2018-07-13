@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>800</height>
+    <width>1920</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>480</y>
+      <y>730</y>
       <width>1091</width>
-      <height>192</height>
+      <height>221</height>
      </rect>
     </property>
    </widget>
@@ -28,13 +28,13 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>680</y>
+      <y>960</y>
       <width>101</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>Add channel</string>
+     <string>&amp;Add channel</string>
     </property>
    </widget>
    <widget class="QCustomPlot" name="channelPlot" native="true">
@@ -42,9 +42,22 @@
      <rect>
       <x>60</x>
       <y>10</y>
-      <width>1091</width>
-      <height>461</height>
+      <width>1841</width>
+      <height>711</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="statusLabel">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>1000</y>
+      <width>601</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
    </widget>
   </widget>
@@ -53,7 +66,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>1920</width>
      <height>22</height>
     </rect>
    </property>
@@ -62,6 +75,9 @@
      <string>&amp;File</string>
     </property>
     <addaction name="action_Connect"/>
+    <addaction name="action_Disconnect"/>
+    <addaction name="action_Load_configuration"/>
+    <addaction name="action_Save_configuration"/>
    </widget>
    <addaction name="menu_File"/>
   </widget>
@@ -74,14 +90,24 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionConnect">
-   <property name="text">
-    <string>Connect</string>
-   </property>
-  </action>
   <action name="action_Connect">
    <property name="text">
     <string>&amp;Connect</string>
+   </property>
+  </action>
+  <action name="action_Disconnect">
+   <property name="text">
+    <string>&amp;Disconnect</string>
+   </property>
+  </action>
+  <action name="action_Load_configuration">
+   <property name="text">
+    <string>&amp;Load configuration</string>
+   </property>
+  </action>
+  <action name="action_Save_configuration">
+   <property name="text">
+    <string>&amp;Save configuration</string>
    </property>
   </action>
  </widget>

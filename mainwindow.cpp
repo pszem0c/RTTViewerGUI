@@ -25,6 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(rttParser, SIGNAL(lineParsed(qint32,qint32)),this, SLOT(updateData(qint32,qint32)));
     connect(rttParser, SIGNAL(lineParsed(QList<QPair<qint32, qint32> >)),this, SLOT(updateData(QList<QPair<qint32, qint32> >)));
 
+    connect(rttConnector, SIGNAL(connectedToHost()), this, SLOT(onRttConnect()));
+    connect(rttConnector, SIGNAL(disconnectedFromHost()), this, SLOT(onRttDisconnect()));
+    connect(rttConnector, SIGNAL(socketError(QString)), this, SLOT(onRttError(QString)));
+
     rttConnector->connectToHost();
 
     ui->channelTable->setColumnCount(6);
@@ -70,4 +74,38 @@ void MainWindow::updateData(QList<QPair<qint32, qint32> > dataList) {
 
 void MainWindow::on_channelTable_cellChanged(int row, int column) {
     rttChannelController->tableValueChanged(row, column);
+}
+
+void MainWindow::onRttConnect() {
+    ui->statusLabel->setText("Connected!");
+}
+
+void MainWindow::onRttDisconnect() {
+    ui->statusLabel->setText("Disconnected!");
+}
+
+void MainWindow::onRttError(QString err) {
+    ui->statusLabel->setText(QString("Error: " + err));
+}
+
+void MainWindow::on_action_Connect_triggered() {
+    rttConnector->connectToHost();
+}
+
+void MainWindow::on_action_Disconnect_triggered() {
+    rttConnector->disconnectFromHost();
+}
+
+void MainWindow::on_action_Load_configuration_triggered() {
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Load configuration"));
+    QList<RTTChannelSettings*> list = rttChannelController->loadConfigurationFromFile(fileName);
+    for (QList<RTTChannelSettings*>::iterator it = list.begin(); it != list.end(); it++) {
+        rttParser->addChannel((*it)->id, (*it)->format);
+        rttChannelLogger->addChannel(*it);
+    }
+}
+
+void MainWindow::on_action_Save_configuration_triggered() {
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save configuration"));
+    rttChannelController->saveConfigurationToFile(fileName);
 }
